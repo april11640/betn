@@ -7,6 +7,8 @@ import yu.betn.produce.aop.SendAfterTransactionCommitted;
 import yu.betn.tutorials.producer.dao.api.ProducerDao;
 import yu.betn.tutorials.producer.domain.Order;
 import yu.betn.tutorials.producer.service.api.ProducerService;
+import yu.betn.tutorials.producer.stream.OrderTemplate;
+import yu.betn.tutorials.producer.stream.SimpleTemplate;
 
 import java.time.LocalDateTime;
 
@@ -19,6 +21,12 @@ public class ProducerServiceImpl implements ProducerService {
     @Autowired
     private ProducerDao producerDao;
 
+    @Autowired
+    private SimpleTemplate simpleTemplate;
+
+    @Autowired
+    private OrderTemplate orderTemplate;
+
     @SendAfterTransactionCommitted
     @Transactional
     @Override
@@ -30,6 +38,8 @@ public class ProducerServiceImpl implements ProducerService {
     @Transactional
     @Override
     public int saveOrder(Order order) {
+        simpleTemplate.send("World");
+        orderTemplate.send(order);
         order.setCreateTime(LocalDateTime.now());
         return producerDao.saveOrder(order);
     }

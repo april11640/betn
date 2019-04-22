@@ -43,4 +43,14 @@ public class Order {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", goods='" + goods + '\'' +
+                ", count=" + count +
+                ", createTime=" + createTime +
+                '}';
+    }
 }

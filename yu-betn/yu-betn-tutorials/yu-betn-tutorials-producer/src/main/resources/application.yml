@@ -21,6 +21,34 @@ spring:
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
     connection-init-sqls: SET NAMES utf8mb4
+  cloud:
+    stream:
+      bindings:
+        simpleReceive:
+          destination: pri.test.simple
+          group: q
+        simpleSend:
+          destination: pri.test.simple
+          contentType: text/plain
+        orderReceive:
+          destination: pri.test.order
+          group: q
+          consumer:
+            maxAttempts: 1
+        orderSend:
+          destination: pri.test.order
+          contentType: application/json
+      rabbit:
+        bindings:
+          orderReceive:
+            consumer:
+              bindingRoutingKey: order
+              autoBindDlq: true
+              republishToDlq: true
+              requeueRejected: true
+          orderSend:
+            producer:
+              routing-key-expression: '''order'''
 
 mybatis:
   mapper-locations: classpath*:mapper/*Mapper.xml
