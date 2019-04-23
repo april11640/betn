@@ -2,16 +2,16 @@ package yu.betn.tutorials.producer.stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.MessageChannel;
-import org.springframework.stereotype.Component;
 
-import static yu.betn.tutorials.producer.stream.Constants.SIMPLE_SEND;
+import static yu.betn.tutorials.producer.stream.SimpleSend.SIMPLE_SEND;
 
 /**
  * Created by zsp on 2019/4/22.
  */
-@Component
+@EnableBinding({SimpleSend.class})
 public class SimpleTemplate {
 
     @Autowired
