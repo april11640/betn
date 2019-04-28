@@ -44,4 +44,30 @@ public class ProducerServiceImpl implements ProducerService {
         return producerDao.saveOrder(order);
     }
 
+    @Transactional
+    @Override
+    public void updateOrder(Order order) {
+        int tryCount = 0;
+        for(;;) {
+            Order beforeUpdateOrder = producerDao.getOrder(order.getGoods());
+            if (beforeUpdateOrder != null) {
+                int affectedRows = producerDao.updateOrderCount(beforeUpdateOrder, order.getCount());
+                System.out.println("affectedRows: " + affectedRows);
+                if(affectedRows > 0) {
+                    break;
+                }
+                tryCount++;
+                if (tryCount > 10) {
+                    throw new RuntimeException("Try 3 times, but no rows affected");
+                }
+            }
+            break;
+        }
+    }
+
+    @Override
+    public Order getOrder(String goods) {
+        return producerDao.getOrder(goods);
+    }
+
 }

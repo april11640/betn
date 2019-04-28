@@ -13,8 +13,10 @@ public class ProduceLog {
     private ProduceLogStatusEnum status;
     private LocalDateTime createTime;
     private LocalDateTime playTime;
-    private boolean needToAcknowledge;
     private LocalDateTime acknowledgeTime;
+    private boolean immediately;
+    private LocalDateTime nextPlayTime;
+    private int playCount;
 
     public Long getId() {
         return id;
@@ -64,19 +66,35 @@ public class ProduceLog {
         this.playTime = playTime;
     }
 
-    public boolean isNeedToAcknowledge() {
-        return needToAcknowledge;
-    }
-
-    public void setNeedToAcknowledge(boolean needToAcknowledge) {
-        this.needToAcknowledge = needToAcknowledge;
-    }
-
     public LocalDateTime getAcknowledgeTime() {
         return acknowledgeTime;
     }
 
     public void setAcknowledgeTime(LocalDateTime acknowledgeTime) {
         this.acknowledgeTime = acknowledgeTime;
+    }
+
+    public boolean isImmediately() {
+        return immediately;
+    }
+
+    public void setImmediately(boolean immediately) {
+        this.immediately = immediately;
+    }
+
+    public LocalDateTime getNextPlayTime() {
+        return nextPlayTime;
+    }
+
+    public void setNextPlayTime(LocalDateTime nextPlayTime) {
+        this.nextPlayTime = nextPlayTime;
+    }
+
+    public int getPlayCount() {
+        return playCount;
+    }
+
+    public void setPlayCount(int playCount) {
+        this.playCount = playCount;
     }
 }

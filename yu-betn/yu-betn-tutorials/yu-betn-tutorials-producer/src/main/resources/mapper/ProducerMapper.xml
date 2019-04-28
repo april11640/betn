@@ -19,5 +19,23 @@
 		)
 	</insert>
 
+	<update id="updateOrderCount">
+		UPDATE `order` SET
+			`count` = `count` + #{param2}
+		WHERE
+			goods = #{param1.goods}
+			AND `count` = #{param1.count}
+	</update>
+
+	<select id="getOrder" resultType="yu.betn.tutorials.producer.domain.Order">
+		SELECT
+			goods ,
+			`count` ,
+			create_time AS createTime
+		FROM `order`
+		WHERE
+			goods = #{param1}
+	</select>
+
 </mapper>
 

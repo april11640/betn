@@ -11,4 +11,8 @@ public interface ProducerService {
 
     int saveOrder(Order order);
 
+    void updateOrder(Order order);
+
+    Order getOrder(String goods);
+
 }

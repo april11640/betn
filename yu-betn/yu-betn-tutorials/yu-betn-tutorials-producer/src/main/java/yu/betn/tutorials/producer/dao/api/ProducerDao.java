@@ -11,4 +11,8 @@ public interface ProducerDao {
 
     int saveOrder(Order order);
 
+    int updateOrderCount(Order order, int delta);
+
+    Order getOrder(String goods);
+
 }
